@@ -1,4 +1,10 @@
 {
+  "compilerOptions": {
+    "baseUrl": ".",                    // 기준 경로
+    "paths": {
+      "@/*": ["src/*"]                // @/ → src/ 경로 매핑
+    }
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
