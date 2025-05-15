@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'MoneygraphyPixel';
+  src: url('/fonts/Moneygraphy-Pixel.woff2') format('woff2'),
+       url('/fonts/Moneygraphy-Pixel.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MoneygraphyRounded';
+  src: url('/fonts/Moneygraphy-Rounded.woff2') format('woff2'),
+       url('/fonts/Moneygraphy-Rounded.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: 'MoneygraphyRounded', sans-serif;
+}
