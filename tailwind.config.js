@@ -1,7 +1,10 @@
+// tailwind.config.js
+import plugin from 'tailwindcss/plugin';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  darkMode: 'class', // 다크모드 class 기반
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -20,20 +23,23 @@ export default {
     },
   },
   plugins: [
-        // 글씨 보더라인 커스텀
-        ({ addUtilities, theme }) => {
-          addUtilities({
-            '.text-stroke-pink': {
-              color: '#fff',
-              '-webkit-text-stroke-width': '2px',
-              '-webkit-text-stroke-color': theme('colors.outlinePink'),
-            },
-            '.text-glow-pink': {
-              'text-shadow':
-                '0 0 0px #fff, 0 0 3px rgba(255,107,138,0.9), 0 0 6px rgba(255,107,138,0.6)',
-            },
-          });
-        }
+    /* 글씨 보더·글로우 유틸리티 */
+    plugin(function ({ addUtilities, theme }) {
+      addUtilities(
+        {
+          '.text-stroke-pink': {
+            color: '#fff',
+            '-webkit-text-stroke-width': '2px',
+            '-webkit-text-stroke-color': theme('colors.outlinePink'),
+          },
+          '.text-glow-pink': {
+            'text-shadow':
+              '0 0 0px #fff, 0 0 3px rgba(255,107,138,0.9), 0 0 6px rgba(255,107,138,0.6)',
+          },
+        },
+        { variants: ['responsive'] } // 필요 없으면 생략해도 됨
+      );
+    }),
   ],
   safelist: [
     'font-rounded',
@@ -53,7 +59,6 @@ export default {
     'p-6',
     'space-y-4',
     'font-paper',
-    'text-white',
     'leading-10',
     'shadow-sm',
     'relative',
@@ -70,7 +75,6 @@ export default {
     'duration-150',
     'group-hover:scale-105',
     'group-active:scale-95',
-    'relative',
     'block',
     'px-10',
     'py-2',
@@ -79,4 +83,4 @@ export default {
     'font-logo',
     'text-red-300',
   ],
-}
+};

@@ -9,7 +9,7 @@ const Landing: React.FC = () => {
   const topMemes = ['TOP 1', 'TOP 2', 'TOP 3', 'TOP 4', 'TOP 5'];
 
   return (
-    <div className="relative w-full max-w-[500px] mx-auto h-[852px] bg-[white] overflow-hidden font-rounded">
+    <div className="relative w-full max-w-[400px] mx-auto h-auto bg-[white] font-rounded mb-[24px]">
       {/* ───────── Header ───────── */}
       <header className="relative flex items-center  gap-[12px] mb-[24px] ml-[24px]">
         <div className="w-10 h-10 rounded-full bg-rose-400 outline outline-[1.5px] outline-black flex items-center justify-center">
@@ -23,32 +23,68 @@ const Landing: React.FC = () => {
 
       {/* ───────── 핑크 배너 (배경 #FF8888) ───────── */}
       <section className="relative left-1/2 -translate-x-1/2 w-[600px] max-w-[110%] bg-[#FF8888] rounded-3xl flex items-center justify-center px-6 text-center pt-[51px] pb-[51px]">
-        <p className="text-[white] text-3xl leading-10 whitespace-pre-line">
-          {`밈랭킹은 한국에서 유행한\n밈을 모으는 랭킹으로\n어쩌구저쩌구 입니다`}
-        </p>
-      </section>
+  <p className="text-[white] font-normal text-[25px] leading-[45px] tracking-normal whitespace-pre-line text-center">
+    {`밈랭킹은 한국에서 유행한\n밈을 모으는 랭킹으로\n어쩌구저쩌구 입니다`}
+    </p>
+    </section>
+
 
       {/* ───────── Top 5 카드 ───────── */}
-      <section className="relative bg-[] rounded-3xl border-[3px] border-[#FF7878] flex flex-col items-center pt-[31px] mt-[41px] mx-[40px]">
-        <h2 className="text-2xl text-stroke-pink text-glow-pink font-logo mb-[14px]">급상승 밈 Top 5</h2>
-        <ul className="flex flex-col text-2xl text-white font-paper leading-10 ">
-          {topMemes.map((m) => (
+      <section className="relative rounded-[26px] border-[3px] border-[#FF7878] bg-[#FFC3C3]
+                    flex flex-col pt-[31px] mt-[41px] mx-[40px]">
+        {/* 타이틀 */}
+        <h2
+          className="text-[32px] font-logo mb-[14px] leading-[45px] tracking-normal"
+          style={{
+            color: '#fff',
+            WebkitTextStroke: '1px #FF7878',
+            textAlign: 'center',
+            fontWeight: '600',
+          }}
+        > 급상승 밈 Top 5</h2>
+        {/* 목록 */}
+          <ul className="flex flex-col list-none font-paper font-normal text-[white]
+                 text-[25px] leading-[45px] tracking-normal items-start">
+            {topMemes.map((m) => (
             <li key={m}>{m}</li>
           ))}
-        </ul>
+          </ul>
       </section>
 
-      {/* ───────── CTA 버튼 ───────── */}
-      <Link
-        to="/ranking"
-        className="relative w-40 h-10 group mt-[20px] justify-center mx-auto flex items-center"
-      >
-        <span className="relative inset-0 bg-[#FFDBDB] rounded-3xl transition-transform duration-150 group-hover:scale-105 group-active:scale-95 " />
-        <span className="relative block w-[160px] rounded-3xl bg-[#FFDBDB] flex items-center justify-center text-red-300 text-xl font-logo">
-          더 알아보기
-        </span>
-      </Link>
-    </div>
+
+{/* ───────── CTA 버튼 ───────── */}
+<Link
+  to="/ranking"
+  /* ▶︎ 고정 크기 & 가운데 배치 */
+  className="relative flex w-[165px] h-[42px] mx-auto mt-[12px]
+             items-center justify-center group no-underline"
+>
+  {/* 바탕 + 아웃라인(박스 그림자) */}
+  <span
+    className="absolute inset-0 rounded-[26px] bg-[#FFDBDB]
+               w-[165px] h-[42px]
+               transition-transform duration-150
+               group-hover:scale-105 group-active:scale-95
+               mt-[12px]
+               z-[1]
+               "
+  />
+    <span
+    className="absolute inset-0 top-[1px] left-[4px] rounded-[26px] bg-[#FF7878]
+               w-[165px] h-[42px]
+               transition-transform duration-150
+               group-hover:scale-105 group-active:scale-95
+               mt-[12px]
+               z-[0]
+               "
+  />
+
+  {/* 라벨 */}
+  <span className="relative z-[3] text-[#FF7F7F] text-[18px] leading-none mt-[12px]">
+    더 알아보기
+  </span>
+</Link>
+  </div>
   );
 };
 
