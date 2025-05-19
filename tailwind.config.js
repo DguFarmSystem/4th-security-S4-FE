@@ -3,7 +3,7 @@ import plugin from 'tailwindcss/plugin';
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './src/features/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -82,5 +82,36 @@ export default {
     'text-xl',
     'font-logo',
     'text-red-300',
+
+    // MemeModal 관련 클래스 추가
+    'fixed',
+    'inset-0',
+    'z-[999999]',
+    'bg-black',
+    'bg-opacity-80',
+    'text-white',
+    'text-[24px]',
+    'flex',
+    'items-center',
+    'justify-center',
+    'border-[5px]',
+    'border-red-500',
+
+    'bg-white',
+    'text-black',
+    'rounded-xl',
+    'p-6',
+    'max-w-sm',
+    'w-full',
+
+    'text-lg',
+    'font-bold',
+    'mb-4',
+    'text-sm',
+    'mt-4',
+    'bg-blue-500',
+    'px-4',
+    'py-2',
+    'rounded',
   ],
 };
