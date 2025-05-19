@@ -82,5 +82,57 @@ export default {
     'text-xl',
     'font-logo',
     'text-red-300',
+
+     // 모달 배경
+  'fixed',
+  'inset-0',
+  'z-[999999]',
+  'bg-black',
+  'bg-opacity-30',
+  'flex',
+  'items-center',
+  'justify-center',
+
+  // 모달 본체
+  'w-[315px]',
+  'h-[432px]',
+  'rounded-[11px]',
+  'bg-white',
+  'p-4',
+  'flex-col',
+  'justify-between',
+
+  // 썸네일 박스
+  'w-[276px]',
+  'h-[189px]',
+  'flex-shrink-0',
+  'rounded-[17px]',
+  'bg-[#FF8989]',
+  'mx-auto',
+  'items-center',
+
+  // 썸네일 텍스트
+  'text-[36px]',
+  'font-normal',
+  'leading-[45px]',
+  'text-[#FFF6F6]',
+  'text-center',
+
+  // 설명 텍스트
+  'w-[271px]',
+  'h-[110px]',
+  'text-black',
+  'mt-6',
+  'mb-6',
+  'break-words',
+
+  // 외부 링크 버튼
+  'w-[230px]',
+  'h-[31px]',
+  'bg-[#FFEBEB]',
+  'rounded-[11px]',
+  'transition-opacity',
+  'hover:opacity-80',
+  'no-underline', // underline 제거
   ],
 };
