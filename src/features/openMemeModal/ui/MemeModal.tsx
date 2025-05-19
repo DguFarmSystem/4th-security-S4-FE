@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useMemeModal } from '@/features/openMemeModal';
-import { ModalPortal } from '@/shared/ui/Modal/ModalPortal';
 
 export const MemeModal = () => {
   const { selectedMeme, closeModal } = useMemeModal();
@@ -16,7 +15,6 @@ export const MemeModal = () => {
   console.log('모달 상태:', selectedMeme);
 
   return (
-    <ModalPortal>
       <div
         onClick={closeModal}
         style={{
@@ -133,6 +131,5 @@ export const MemeModal = () => {
 </a>
         </div>
       </div>
-    </ModalPortal>
   );
 };
