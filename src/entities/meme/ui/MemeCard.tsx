@@ -6,7 +6,7 @@ interface MemeCardProps {
 }
 
 export const MemeCard = ({ meme }: MemeCardProps) => {
-  const { title, tags, thumbnailUrl, rank } = meme;
+  const { title, tags, description, thumbnailUrl, rank } = meme;
   const { openModal } = useMemeModal();
 
   return (
@@ -17,7 +17,7 @@ export const MemeCard = ({ meme }: MemeCardProps) => {
     openModal(meme);
   }}
 >
-  {/* 🎯 동그라미: 카드 내부 좌상단에 고정 */}
+  {/* 동그라미: 카드 내부 좌상단에 고정 */}
   <div className="absolute top-[-19px] left-[-19px] w-[38px] h-[38px] bg-[#FFC3C3] rounded-full z-10" />
 
   {/* 왼쪽 텍스트 정보 */}
