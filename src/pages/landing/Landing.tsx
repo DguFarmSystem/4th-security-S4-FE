@@ -112,14 +112,26 @@ const Landing: React.FC = () => {
         > 급상승 밈 Top 5</h2>
         {/* 목록 */}
         {isLoading ? (
-          <div className="text-center text-[white] text-[24px]"></div>
+            <ul className="flex flex-col list-none font-paper font-normal text-[white]
+            text-[25px] leading-[45px] tracking-normal items-start px-5 pb-[5px] gap-[8px]">
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <li
+                key={idx}
+                className="animate-pulse flex items-center gap-5 w-full bg-[#ffdede] rounded-[10px] max-w-[250px] h-[45px]">
+              <div className="bg-[#ffbdbd] rounded-md h-[40px] w-[80px] ml-[8px]" />
+              <div className="flex flex-col justify-center truncate w-[200px]">
+              <div className="bg-[#ffbdbd] h-[40px] w-full rounded-sm" />
+              </div>
+             </li>
+              ))}
+          </ul>
         ) : (
           <ul className="flex flex-col list-none font-paper font-normal text-[white]
                  text-[25px] leading-[45px] tracking-normal items-start px-5 pb-[5px] gap-[8px]">
             {risingMemes.map((meme) => (
-              <li key={meme.video_id} className="flex items-center gap-5 w-full" style={{ backgroundColor: meme.color, borderRadius: '10px',maxWidth: '240px' }}>
-                <span className="font-bold min-w-[80px]">TOP {meme.rank_position}</span>
-                <div className="flex flex-col" >
+              <li key={meme.video_id} className="flex items-center gap-5 w-full" style={{ backgroundColor: meme.color, borderRadius: '10px',maxWidth: '250px' }}>
+                <span className="font-bold min-w-[80px] item-center ml-[8px]">TOP {meme.rank_position}</span>
+                <div className="flex flex-col item-center truncate " >
                   <span className="text-[20px]">{meme.title}</span>
                 </div>
               </li>
