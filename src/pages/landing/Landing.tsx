@@ -8,6 +8,8 @@ interface RisingMeme {
   rank_position: number;
   thumbnail_url: string;
   platform: string;
+
+  color: string;
 }
 
 // 더미 데이터
@@ -17,35 +19,40 @@ const MOCK_RISING_MEMES: RisingMeme[] = [
     title: "깡총깡총 챌린지",
     rank_position: 1,
     thumbnail_url: "https://cdn.example.com/meme1.jpg",
-    platform: "TikTok"
+    platform: "TikTok",
+    color: "#FF4B4B"
   },
   {
     video_id: "6640c234567890",
     title: "뉴진스 하니 밈",
     rank_position: 2,
     thumbnail_url: "https://cdn.example.com/meme2.jpg",
-    platform: "YouTube"
+    platform: "YouTube",
+    color:' #FF6E6E'
   },
   {
     video_id: "6640c345678901",
     title: "르세라핌 카즈하 밈",
     rank_position: 3,
     thumbnail_url: "https://cdn.example.com/meme3.jpg",
-    platform: "TikTok"
+    platform: "TikTok",
+    color: "#FF8484"
   },
   {
     video_id: "6640c456789012",
     title: "에스파 윈터 밈",
     rank_position: 4,
     thumbnail_url: "https://cdn.example.com/meme4.jpg",
-    platform: "YouTube"
+    platform: "YouTube",
+    color: "#FFB6B6"
   },
   {
     video_id: "6640c567890123",
     title: "블랙핑크 리사 밈",
     rank_position: 5,
     thumbnail_url: "https://cdn.example.com/meme5.jpg",
-    platform: "TikTok"
+    platform: "TikTok",
+    color: "#FFB6B6"
   }
 ];
 
@@ -60,7 +67,7 @@ const Landing: React.FC = () => {
   useEffect(() => {
     // 더미 데이터 사용
     const loadMockData = async () => {
-      await new Promise(resolve => setTimeout(resolve, 1000)); // 로딩 효과를 위한 딜레이
+      await new Promise(resolve => setTimeout(resolve, 500)); // 로딩 효과를 위한 딜레이
       setRisingMemes(MOCK_RISING_MEMES);
       setIsLoading(false);
     };
@@ -72,7 +79,7 @@ const Landing: React.FC = () => {
     <div className="relative w-full max-w-[400px] mx-auto h-auto bg-[white] font-rounded mb-[24px]">
       {/* ───────── Header ───────── */}
       <header className="relative flex items-center gap-[12px] mb-[24px] ml-[24px]">
-        <Link to="/" className="flex items-center gap-[12px] transition-transform duration-200 hover:scale-105 active:scale-95">
+        <Link to="/" className="flex items-center gap-[12px] no-underline">
           <div className="w-10 h-10 rounded-full bg-rose-400 outline outline-[1.5px] outline-black flex items-center justify-center">
             <img src={LogoSvg} alt="logo" className="w-7 h-7" />
           </div>
@@ -84,35 +91,35 @@ const Landing: React.FC = () => {
       </header>
 
       {/* ───────── 핑크 배너 (배경 #FF8888) ───────── */}
-      <section className="relative left-1/2 -translate-x-1/2 w-[600px] max-w-[110%] bg-[#FF8888] rounded-3xl flex items-center justify-center px-6 text-center pt-[51px] pb-[51px]">
+      <section className="relative left-1/2 -translate-x-1/2 w-[600px] max-w-[110%] 
+       rounded-3xl flex items-center justify-center px-6 text-center pt-[51px] pb-[51px]" style={{ background: 'linear-gradient(to bottom, #FF7979, #FFB3B3)' }}>
         <p className="text-[white] font-normal text-[25px] leading-[45px] tracking-normal whitespace-pre-line text-center">
           {`밈랭킹은 한국에서 유행한\n밈을 모으는 랭킹으로\n어쩌구저쩌구 입니다`}
         </p>
       </section>
 
       {/* ───────── Top 5 카드 ───────── */}
-      <section className="relative rounded-[26px] border-[3px] border-[#FF7878] bg-[#FFC3C3]
-                    flex flex-col pt-[31px] mt-[41px] mx-[40px]">
+      <section className="relative rounded-[26px]  bg-[#FFE1E1]
+                    flex flex-col mt-[41px] mx-[36px]">
         {/* 타이틀 */}
         <h2
-          className="text-[32px] font-logo mb-[14px] leading-[45px] tracking-normal"
+          className="text-[32px] font-logo tracking-normal"
           style={{
-            color: '#fff',
-            WebkitTextStroke: '1px #FF7878',
+            color: '#FF4B4B',
             textAlign: 'center',
-            fontWeight: '600',
+            fontWeight: '400',
           }}
         > 급상승 밈 Top 5</h2>
         {/* 목록 */}
         {isLoading ? (
-          <div className="text-center text-white py-4">로딩 중...</div>
+          <div className="text-center text-[white] text-[24px]"></div>
         ) : (
           <ul className="flex flex-col list-none font-paper font-normal text-[white]
-                 text-[25px] leading-[45px] tracking-normal items-start px-6 pb-6">
+                 text-[25px] leading-[45px] tracking-normal items-start px-5 pb-[5px] gap-[8px]">
             {risingMemes.map((meme) => (
-              <li key={meme.video_id} className="flex items-center gap-4 w-full">
+              <li key={meme.video_id} className="flex items-center gap-5 w-full" style={{ backgroundColor: meme.color, borderRadius: '10px',maxWidth: '240px' }}>
                 <span className="font-bold min-w-[80px]">TOP {meme.rank_position}</span>
-                <div className="flex flex-col">
+                <div className="flex flex-col" >
                   <span className="text-[20px]">{meme.title}</span>
                 </div>
               </li>
