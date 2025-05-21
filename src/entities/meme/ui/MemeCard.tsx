@@ -1,4 +1,5 @@
 import { Meme } from '../model/types';
+import { fetchMemeDetail } from '../api/fetchMemeDetail';
 import { useMemeModal } from '@/features/openMemeModal';
 
 interface MemeCardProps {
@@ -6,16 +7,22 @@ interface MemeCardProps {
 }
 
 export const MemeCard = ({ meme }: MemeCardProps) => {
-  const { title, tags, description, thumbnailUrl, rank } = meme;
+  const { title, hashtags, rank_position, video_id } = meme;
   const { openModal } = useMemeModal();
+
+  const handleClick = async () => {
+    try {
+      const detail = await fetchMemeDetail(video_id);
+      openModal(detail);
+    } catch (err) {
+      console.error('밈 상세 조회 실패:', err);
+    }
+  };
 
   return (
    <div
   className="relative cursor-pointer h-[118px] bg-[#FFDBDB] rounded-[10px] w-full flex items-center gap-4 px-[16px]"
-  onClick={() => {
-    console.log('카드 클릭됨:', meme);
-    openModal(meme);
-  }}
+  onClick={handleClick}
 >
   {/* 동그라미: 카드 내부 좌상단에 고정 */}
   <div className="absolute top-[-19px] left-[-19px] w-[38px] h-[38px] bg-[#FFC3C3] rounded-full z-10" />
@@ -26,7 +33,7 @@ export const MemeCard = ({ meme }: MemeCardProps) => {
       {title}
     </p>
     <p className="font-rounded font-normal text-[16px] leading-[24px] text-[#FFF6F6] w-[202px] shrink-0 break-words">
-      {tags.map((tag) => `#${tag}`).join(' ')}
+      {hashtags.map((tag) => `#${tag}`).join(' ')}
     </p>
   </div>
 

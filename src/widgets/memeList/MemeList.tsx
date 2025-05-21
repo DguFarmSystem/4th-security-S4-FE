@@ -13,7 +13,7 @@ export const MemeList = () => {
   return (
      <div className="flex flex-col gap-[46px] w-full items-center">
   {memes.map((meme) => (
-    <MemeCard key={meme.id} meme={meme} />
+    <MemeCard key={meme.video_id} meme={meme} />
   ))}
 </div>
   );
