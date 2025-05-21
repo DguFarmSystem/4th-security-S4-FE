@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import { Meme } from '@/entities/meme/model/types';
+import { MemeDetail } from '@/entities/meme/model/types';
 
 interface MemeModalState {
-  selectedMeme: Meme | null;
-  openModal: (meme: Meme) => void;
+  selectedMeme: MemeDetail | null;
+  openModal: (meme: MemeDetail) => void;
   closeModal: () => void;
 }
 

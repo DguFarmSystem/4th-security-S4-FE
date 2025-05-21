@@ -91,7 +91,7 @@ export const MemeModal = () => {
 
           {/* 외부 링크 버튼 */}
           <a
-  href={selectedMeme.thumbnailUrl ?? '#'}
+  href={selectedMeme.url ?? '#'}
   target="_blank"
   rel="noopener noreferrer"
   style={{
