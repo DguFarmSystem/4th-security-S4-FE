@@ -1,0 +1,60 @@
+import { useEffect, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { Meme } from '@/entities/meme/model/types';
+import { fetchMemes } from '@/entities/meme/api/fetchMemes';
+import { MemeCard } from '@/entities/meme/ui/MemeCard';
+import LogoSvg from '@/assets/logo.svg';
+
+export default function SearchPage() {
+  const query = new URLSearchParams(useLocation().search).get('q') ?? '';
+  const [results, setResults] = useState<Meme[]>([]);
+
+  // query → 띄어쓰기 제거 및 소문자 변환
+const cleanedQuery = query.replace(/\s+/g, '').toLowerCase();
+
+  useEffect(() => {
+    if (!query) return;
+    fetchMemes().then((memes) => {
+      const filtered = memes.filter((meme) => {
+  const cleanedTitle = meme.title.replace(/\s+/g, '').toLowerCase();
+  const cleanedTags = meme.hashtags.map((tag) => tag.toLowerCase());
+
+  return (
+    cleanedTitle.includes(cleanedQuery) ||
+    cleanedTags.some((tag) => tag.includes(cleanedQuery))
+  );
+});
+
+      setResults(filtered);
+    });
+  }, [query]);
+
+  return (
+    <div className="relative w-full max-w-[400px] mx-auto h-auto bg-white font-rounded mb-[24px] px-[35px] pt-[46px]">
+       <header className="relative flex items-center gap-[12px] mb-[24px]">
+        <Link to="/" className="flex items-center gap-[12px] no-underline">
+          <div className="w-10 h-10 rounded-full outline outline-[1.5px] outline-black flex items-center justify-center">
+            <img src={LogoSvg} alt="logo" className="w-7 h-7" />
+          </div>
+          <h1 className="text-3xl font-logo select-none">
+            <span className="text-[#FF8989]">밈</span>
+            <span className="text-[#111111]">클리</span>
+          </h1>
+        </Link>
+      </header>
+      <h1 className="text-[20px] font-bold mb-[24px] text-black text-center">
+        검색 결과: “{query}”
+      </h1>
+
+      <div className="flex flex-col gap-[46px] w-full items-center">
+        {results.length > 0 ? (
+          results.map((meme) => (
+            <MemeCard key={meme.video_id} meme={meme} />
+          ))
+        ) : (
+          <p className="text-center text-gray-500">결과가 없습니다.</p>
+        )}
+      </div>
+    </div>
+  );
+}
