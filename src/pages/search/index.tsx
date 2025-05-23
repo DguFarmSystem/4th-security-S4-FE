@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { Meme } from '@/entities/meme/model/types';
 import { fetchMemes } from '@/entities/meme/api/fetchMemes';
+import SearchInput from '@/features/searchMemes/ui/SearchInput'
 import { MemeCard } from '@/entities/meme/ui/MemeCard';
 import { MemeModal } from '@/features/openMemeModal';
 import LogoSvg from '@/assets/logo.svg';
@@ -44,6 +45,10 @@ const cleanedQuery = query.replace(/\s+/g, '').toLowerCase();
           </h1>
         </Link>
       </header>
+
+       {/* 검색창 삽입 */}
+        <SearchInput initialValue={query} />
+
       <h1 className="text-[20px] font-bold mb-[24px] text-black text-center">
         검색 결과: “{query}”
       </h1>

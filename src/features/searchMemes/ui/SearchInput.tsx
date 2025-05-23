@@ -1,8 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-export default function SearchInput() {
-  const [input, setInput] = useState('');
+interface SearchInputProps {
+  initialValue?: string;
+}
+
+export default function SearchInput({ initialValue = '' }: SearchInputProps) {
+  const [input, setInput] = useState(initialValue);
   const navigate = useNavigate();
 
   const handleSearch = () => {
