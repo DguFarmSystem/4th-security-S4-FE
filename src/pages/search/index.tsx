@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { Meme } from '@/entities/meme/model/types';
 import { fetchMemes } from '@/entities/meme/api/fetchMemes';
 import { MemeCard } from '@/entities/meme/ui/MemeCard';
+import { MemeModal } from '@/features/openMemeModal';
 import LogoSvg from '@/assets/logo.svg';
 
 export default function SearchPage() {
@@ -30,6 +31,7 @@ const cleanedQuery = query.replace(/\s+/g, '').toLowerCase();
   }, [query]);
 
   return (
+    <>
     <div className="relative w-full max-w-[400px] mx-auto h-auto bg-white font-rounded mb-[24px] px-[35px] pt-[46px]">
        <header className="relative flex items-center gap-[12px] mb-[24px]">
         <Link to="/" className="flex items-center gap-[12px] no-underline">
@@ -56,5 +58,8 @@ const cleanedQuery = query.replace(/\s+/g, '').toLowerCase();
         )}
       </div>
     </div>
+    {/* 모달 추가 */}
+      <MemeModal />
+    </>
   );
 }
