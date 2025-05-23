@@ -11,16 +11,19 @@ export default function SearchPage() {
   const query = new URLSearchParams(useLocation().search).get('q') ?? '';
   const [results, setResults] = useState<Meme[]>([]);
 
-  // query → 띄어쓰기 제거 및 소문자 변환
-const cleanedQuery = query.replace(/\s+/g, '').toLowerCase();
-
   useEffect(() => {
     if (!query) return;
     fetchMemes().then((memes) => {
-      const filtered = memes.filter((meme) => {
-  const cleanedTitle = meme.title.replace(/\s+/g, '').toLowerCase();
-  const cleanedTags = meme.hashtags.map((tag) => tag.toLowerCase());
+      const cleanedQuery = query.replace(/\s+/g, '').toLowerCase();
 
+      const filtered = memes.filter((meme) => {
+      const cleanedTitle = meme.title.replace(/\s+/g, '').toLowerCase();
+      const cleanedTags = meme.hashtags.map((tag) => tag.toLowerCase());
+
+      if (query.startsWith('#')) {
+        const tagQuery = cleanedQuery.slice(1);
+        return cleanedTags.includes(tagQuery);
+      }
   return (
     cleanedTitle.includes(cleanedQuery) ||
     cleanedTags.some((tag) => tag.includes(cleanedQuery))
@@ -49,7 +52,7 @@ const cleanedQuery = query.replace(/\s+/g, '').toLowerCase();
        {/* 검색창 삽입 */}
         <SearchInput initialValue={query} />
 
-      <h1 className="text-[20px] font-bold mb-[24px] text-black text-center">
+      <h1 className="text-[20px] font-bold mb-[24px] text-[#111111] text-center">
         검색 결과: “{query}”
       </h1>
 
@@ -59,7 +62,7 @@ const cleanedQuery = query.replace(/\s+/g, '').toLowerCase();
             <MemeCard key={meme.video_id} meme={meme} />
           ))
         ) : (
-          <p className="text-center text-gray-500">결과가 없습니다.</p>
+          <p className="text-center text-[#111111]">결과가 없습니다.</p>
         )}
       </div>
     </div>
