@@ -22,8 +22,8 @@ export default function SearchPage() {
 
       if (query.startsWith('#')) {
         const tagQuery = cleanedQuery.slice(1);
-        // 부분 일치 태그 검색
-        return cleanedTags.some((tag) => tag.includes(tagQuery));
+         // 정확히 일치하는 태그만 허용
+        return cleanedTags.includes(tagQuery);
       }
   return (
     cleanedTitle.includes(cleanedQuery) ||
