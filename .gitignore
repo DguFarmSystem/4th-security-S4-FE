@@ -40,3 +40,4 @@ Thumbs.db
 # Cache
 .pnpm-store/
 .cache/
+.vercel

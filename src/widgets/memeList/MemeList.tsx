@@ -7,7 +7,10 @@ export const MemeList = () => {
   const [memes, setMemes] = useState<Meme[]>([]);
 
   useEffect(() => {
-    fetchMemes().then(setMemes);
+    fetchMemes().then((data) => {
+      const sorted = [...data].sort((a, b) => a.rank_position - b.rank_position);
+      setMemes(sorted);
+    });
   }, []);
 
   return (
