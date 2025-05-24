@@ -7,7 +7,7 @@ interface MemeCardProps {
 }
 
 export const MemeCard = ({ meme }: MemeCardProps) => {
-  const { title, hashtags, rank_position, video_id } = meme;
+  const { title, hashtags, video_id } = meme;
   const { openModal } = useMemeModal();
 
   const handleClick = async () => {
