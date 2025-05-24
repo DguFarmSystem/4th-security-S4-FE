@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import SearchInput from '@/features/searchMemes/ui/SearchInput'
 import { MemeList } from '@/widgets/memeList/MemeList';
 import { Link } from 'react-router-dom';
 import LogoSvg from '@/assets/logo.svg';
@@ -19,7 +20,7 @@ export default function RankingPage() {
 
   return (
     <>
-    <div className="relative w-full max-w-[400px] mx-auto h-auto bg-[white] font-rounded mb-[24px]">
+    <div className="relative w-full max-w-[400px] mx-auto h-auto bg-[white] font-rounded mb-[24px] px-[35px] pt-[46px]">
       <header className="relative flex items-center gap-[12px] mb-[24px] ">
         <Link to="/" className="flex items-center gap-[12px] no-underline">
           <div className="w-10 h-10 rounded-full outline outline-[1.5px] outline-black flex items-center justify-center">
@@ -54,6 +55,8 @@ export default function RankingPage() {
     </span>
           </div>
         </div>
+{/* 검색 입력창 */}
+<SearchInput />
 
         {/* 전체 랭킹 리스트 */}
         <MemeList />
