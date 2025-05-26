@@ -1,6 +1,6 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'https://fellow-myrilla-dohyunk58-781ebbd2.koyeb.app',
+  baseURL: 'https://memekly.koyeb.app',
   timeout: 5000,
 });
