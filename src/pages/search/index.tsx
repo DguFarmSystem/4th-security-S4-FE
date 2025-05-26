@@ -5,7 +5,7 @@ import { fetchMemes } from '@/entities/meme/api/fetchMemes';
 import SearchInput from '@/features/searchMemes/ui/SearchInput'
 import { MemeCard } from '@/entities/meme/ui/MemeCard';
 import { MemeModal } from '@/features/openMemeModal';
-import LogoSvg from '@/assets/logo.svg';
+import LogoSvg from '../../assets/logo.svg';
 
 export default function SearchPage() {
   const query = new URLSearchParams(useLocation().search).get('q') ?? '';
@@ -54,7 +54,7 @@ export default function SearchPage() {
         <SearchInput initialValue={query} />
 
       <h1 className="text-[20px] font-bold mb-[24px] text-[#111111] text-center">
-        검색 결과: “{query}”
+        검색 결과: " {query} "
       </h1>
 
       <div className="flex flex-col gap-[46px] w-full items-center">
