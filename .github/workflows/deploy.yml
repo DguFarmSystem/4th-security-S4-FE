@@ -7,7 +7,7 @@ on:
 
 jobs:
   sync:
-    name: Sync forked repo
+    name: Synchronize forked repo
     runs-on: ubuntu-latest
 
     steps:
