@@ -5,10 +5,11 @@ import axios from 'axios';
 
 // axios 인스턴스 생성
 const api = axios.create({
-  baseURL: 'https://memekly.koyeb.app',
+  baseURL: 'https://cors-anywhere.herokuapp.com/https://memekly.koyeb.app',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
+    'Origin': 'https://4th-security-s4-fe-8om6.vercel.app'
   },
   withCredentials: false,
 });
