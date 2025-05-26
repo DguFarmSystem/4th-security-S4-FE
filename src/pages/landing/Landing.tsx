@@ -5,12 +5,12 @@ import axios from 'axios';
 
 // axios 인스턴스 생성
 const api = axios.create({
-  baseURL: '', // 프록시를 사용하므로 baseURL 제거
+  baseURL: 'https://memekly.koyeb.app',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
-  withCredentials: false, // credentials 제외
+  withCredentials: false,
 });
 
 interface RisingMeme {
