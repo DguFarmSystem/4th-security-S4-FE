@@ -2,33 +2,29 @@ name: Synchronize to forked repository
 
 on:
   push:
-    branches: ['main'] # 어떤 브랜치에 push 될 때 실행할건지
+    branches:
+      - main
 
 jobs:
-  build:
+  sync:
+    name: Sync forked repo
     runs-on: ubuntu-latest
-    container: pandoc/latex
+
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Install mustache (to update the date)
-        run: apk add ruby && gem install mustache
-
-      - name: creates output
-        run: sh ./build.sh
-
-      - name: Pushes to another repository
-        id: push_directory
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.AUTO_ACTIONS }} # 5번에서 설정한 secret 토큰 중 ghp_ 로 시작하는 값 넣은 변수
+      - name: Checkout current branch
+        uses: actions/checkout@v4
         with:
-          source-directory: 'output' # 빌드된 결과물의 경로
-          destination-github-username: minij02 # 개인 레포 소유자의 username
-          destination-repository-name: 4th-security-S4-FE # 포크 뜬 개인 레포 이름
-          user-email: ${{ secrets.OFFICIAL_ACCOUNT_EMAIL }} # 개인 계정 이메일
-          commit-message: ${{ github.event.commits[0].message }}
-          target-branch: main # 개인 레포의 어느 브랜치에 복사할건지
+          token: ${{ secrets.AUTO_ACTIONS }}
+          fetch-depth: 0
 
-      - name: Test get variable exported by push-to-another-repository
-        run: echo $DESTINATION_CLONED_DIRECTORY
+      - name: Add remote forked-repo
+        run: |
+          git remote add forked-repo https://minij02:${{ secrets.AUTO_ACTIONS }}@github.com/minij02/4th-security-S4-FE.git
+          git config user.name "minij02"
+          git config user.email "${{ secrets.OFFICIAL_ACCOUNT_EMAIL }}"
+
+      - name: Push to fork
+        run: git push -f forked-repo main
+
+      - name: Clean up
+        run: git remote remove forked-repo
