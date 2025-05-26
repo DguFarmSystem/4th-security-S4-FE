@@ -10,4 +10,14 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"), // @ → src/
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://memekly.koyeb.app',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path
+      }
+    }
+  }
 });
