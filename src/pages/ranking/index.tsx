@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import SearchInput from '@/features/searchMemes/ui/SearchInput'
 import { MemeList } from '@/widgets/memeList/MemeList';
 import { Link } from 'react-router-dom';
-import LogoSvg from '@/assets/logo.svg';
+import LogoSvg from '../../assets/logo.svg';
 import { Meme } from '@/entities/meme/model/types';
 import { fetchMemes } from '@/entities/meme/api/fetchMemes';
 import { MemeModal } from '@/features/openMemeModal';
