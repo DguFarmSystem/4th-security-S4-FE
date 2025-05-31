@@ -5,6 +5,7 @@ import axios from 'axios';
 
 // axios 인스턴스 생성
 const api = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -39,8 +40,8 @@ const Landing: React.FC = () => {
   useEffect(() => {
     const fetchRisingMemes = async () => {
       try {
-        console.log('Fetching from:', '/api/trends/rising');
-        const response = await api.get('/api/trends/rising');
+        console.log('Fetching from:', '/trends/rising');
+        const response = await api.get('/trends/rising');
 
         console.log('API Response:', response.data);
 
