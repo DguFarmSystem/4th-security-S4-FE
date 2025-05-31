@@ -18,7 +18,7 @@ interface RawMemeDetail {
 
 export const fetchMemeDetail = async (id: string): Promise<MemeDetail> => {
   try {
-    const response = await api.get<RawMemeDetail>(`/videos/${id}`);
+    const response = await api.get<RawMemeDetail>(`/memes/${id}`);
     const data = response.data;
 
     const mapped: MemeDetail = {
