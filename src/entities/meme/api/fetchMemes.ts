@@ -30,7 +30,7 @@ interface MemeApiResponse {
 
 export const fetchMemes = async (): Promise<Meme[]> => {
   try {
-    const response = await api.get<MemeApiResponse>('/api/trends/ranking?page=1&limit=20');
+    const response = await api.get<MemeApiResponse>('/trends/ranking?page=1&limit=20');
     const rawData = response.data.content;
 
     if (Array.isArray(rawData) && rawData.length > 0) {
