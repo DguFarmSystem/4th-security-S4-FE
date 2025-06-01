@@ -7,7 +7,7 @@ interface MemeCardProps {
 }
 
 export const MemeCard = ({ meme }: MemeCardProps) => {
-  const { title, hashtags, video_id } = meme;
+  const { title, hashtags, video_id, thumbnail_url } = meme;
   const { openModal } = useMemeModal();
 
   const handleClick = async () => {
@@ -39,7 +39,13 @@ export const MemeCard = ({ meme }: MemeCardProps) => {
 
   {/* 오른쪽 썸네일 */}
   <div className="flex items-center h-full font-rounded">
-    <button
+    {thumbnail_url ? (
+      <img
+      src={thumbnail_url}
+      alt="썸네일"
+      className="w-[85px] h-[91px] rounded-[9px] object-cover"/>
+      ) : (
+        <button
       style={{ fontFamily: 'MoneygraphyRounded, sans-serif' }}
       className="appearance-none text-[16px] font-normal text-[#FFF6F6]
                  w-[85px] h-[91px] shrink-0 bg-[#FF7878] rounded-[9px]
@@ -47,6 +53,8 @@ export const MemeCard = ({ meme }: MemeCardProps) => {
     >
       썸네일
     </button>
+      )
+    }
   </div>
 </div>
   );
