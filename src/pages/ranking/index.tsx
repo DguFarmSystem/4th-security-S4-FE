@@ -9,10 +9,15 @@ import { MemeModal } from '@/features/openMemeModal';
 
 export default function RankingPage() {
   const [memes, setMemes] = useState<Meme[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    fetchMemes().then(setMemes);
-  }, []);
+    fetchMemes(currentPage).then(({ memes, totalPages }) => {
+      setMemes(memes);
+      setTotalPages(totalPages);
+    });
+  }, [currentPage]);
 
   const first = memes.find((m) => m.rank_position === 1);
   const second = memes.find((m) => m.rank_position === 2);
