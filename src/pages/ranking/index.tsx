@@ -4,21 +4,19 @@ import { MemeList } from '@/widgets/memeList/MemeList';
 import { Link } from 'react-router-dom';
 import LogoSvg from '../../assets/logo.svg';
 import { Meme } from '@/entities/meme/model/types';
-import { fetchMemes } from '@/entities/meme/api/fetchMemes';
+import { fetchTopMemes } from '@/entities/meme/api/fetchMemes';
 import { MemeModal } from '@/features/openMemeModal';
 
 export default function RankingPage() {
-  const [memes, setMemes] = useState<Meme[]>([]);
+  const [top, setTop] = useState<Meme[]>([]);
 
   useEffect(() => {
-    fetchMemes().then(({ memes }) => {
-      setMemes(memes);
-    });
+    fetchTopMemes().then(setTop);
   }, []);
 
-  const first = memes.find((m) => m.rank_position === 1);
-  const second = memes.find((m) => m.rank_position === 2);
-  const third = memes.find((m) => m.rank_position === 3);
+  const first = top[0];
+  const second = top[1];
+  const third = top[2];
 
   return (
     <>
