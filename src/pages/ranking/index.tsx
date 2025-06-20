@@ -11,7 +11,9 @@ export default function RankingPage() {
   const [memes, setMemes] = useState<Meme[]>([]);
 
   useEffect(() => {
-    fetchMemes().then(setMemes);
+    fetchMemes().then(({ memes }) => {
+      setMemes(memes);
+    });
   }, []);
 
   const first = memes.find((m) => m.rank_position === 1);

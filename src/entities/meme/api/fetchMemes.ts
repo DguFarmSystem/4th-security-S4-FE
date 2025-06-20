@@ -28,10 +28,11 @@ interface MemeApiResponse {
   empty: boolean;
 }
 
-export const fetchMemes = async (): Promise<Meme[]> => {
+export const fetchMemes = async (page: number = 1): Promise<{ memes: Meme[]; totalPages: number}> => {
   try {
-    const response = await api.get<MemeApiResponse>('/trends/ranking?page=1&limit=20');
+    const response = await api.get<MemeApiResponse>('/trends/ranking?page=${page}&limit=20');
     const rawData = response.data.content;
+    const totalPages = response.data.totalPages;
 
     if (Array.isArray(rawData) && rawData.length > 0) {
       const mapped: Meme[] = rawData.map((item, index) => ({
@@ -40,16 +41,15 @@ export const fetchMemes = async (): Promise<Meme[]> => {
         hashtags: item.hashtags,
         thumbnail_url: item.thumbnailUrl,
         platform: item.platform,
-        rank_position: index + 1,
+        rank_position: index + 1 + (page - 1) * 20, // 페이지네이션 반영
         ranking_score: 100 - index, // 필요 시 계산 로직 조정
       }));
-      return mapped;
+       return { memes: mapped, totalPages };
     } else {
-      console.warn('API에서 빈 배열 반환, mock 데이터 사용');
-      return mockMemeData;
+      return { memes: mockMemeData, totalPages: 1 };
     }
   } catch (error) {
     console.error('API 요청 실패, mock 데이터 사용:', error);
-    return mockMemeData;
+    return { memes: mockMemeData, totalPages: 1 };
   }
 };

@@ -4,16 +4,27 @@ import { Meme } from '@/entities/meme/model/types';
 import { fetchMemes } from '@/entities/meme/api/fetchMemes';
 import SearchInput from '@/features/searchMemes/ui/SearchInput'
 import { MemeCard } from '@/entities/meme/ui/MemeCard';
+import { Pagination } from '@/shared/ui/Pagination';
 import { MemeModal } from '@/features/openMemeModal';
 import LogoSvg from '../../assets/logo.svg';
 
 export default function SearchPage() {
   const query = new URLSearchParams(useLocation().search).get('q') ?? '';
   const [results, setResults] = useState<Meme[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  // 계산된 페이지 수
+  const totalPages = Math.ceil(results.length / itemsPerPage);
+
+  // 현재 페이지의 밈들
+  const currentItems = results.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   useEffect(() => {
     if (!query) return;
-    fetchMemes().then((memes) => {
+    fetchMemes().then(({ memes }) => {
       const cleanedQuery = query.replace(/\s+/g, '').toLowerCase();
 
       const filtered = memes.filter((meme) => {
@@ -58,14 +69,17 @@ export default function SearchPage() {
       </h1>
 
       <div className="flex flex-col gap-[46px] w-full items-center">
-        {results.length > 0 ? (
-          results.map((meme) => (
+        {currentItems.length > 0 ? (
+          currentItems.map((meme) => (
             <MemeCard key={meme.video_id} meme={meme} />
           ))
         ) : (
           <p className="text-center text-[#111111]">결과가 없습니다.</p>
         )}
       </div>
+      {totalPages > 1 && (
+  <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+)}
     </div>
     {/* 모달 추가 */}
       <MemeModal />
