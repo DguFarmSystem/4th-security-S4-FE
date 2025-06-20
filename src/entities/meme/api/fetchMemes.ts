@@ -28,6 +28,26 @@ interface MemeApiResponse {
   empty: boolean;
 }
 
+export const fetchTopMemes = async (): Promise<Meme[]> => {
+  try {
+    const response = await api.get<RawMeme[]>('/trends/rising');
+    const rawData = response.data.slice(0, 3); // 상위 3개만 사용
+
+      return rawData.map((item, index) => ({
+        video_id: item.id,
+        title: item.title,
+        hashtags: item.hashtags,
+        thumbnail_url: item.thumbnailUrl,
+        platform: item.platform,
+        rank_position: index + 1, // 첫 페이지이므로 인덱스 그대로 사용
+        ranking_score: 100 - index, // 필요 시 계산 로직 조정
+      }));
+    } catch (error) {
+      console.error('API 요청 실패, mock 데이터 사용:', error);
+      return mockMemeData.slice(0, 3);
+    }
+}
+
 export const fetchMemes = async (page: number = 1): Promise<{ memes: Meme[]; totalPages: number}> => {
   try {
     const response = await api.get<MemeApiResponse>('/trends/ranking?page=${page}&limit=20');
