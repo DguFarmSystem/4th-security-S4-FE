@@ -50,7 +50,7 @@ export const fetchTopMemes = async (): Promise<Meme[]> => {
 
 export const fetchMemes = async (page: number = 1): Promise<{ memes: Meme[]; totalPages: number}> => {
   try {
-    const response = await api.get<MemeApiResponse>('/trends/ranking?page=${page}&limit=20');
+    const response = await api.get<MemeApiResponse>(`/trends/ranking?page=${page}&limit=20`);
     const rawData = response.data.content;
     const totalPages = response.data.totalPages;
 
