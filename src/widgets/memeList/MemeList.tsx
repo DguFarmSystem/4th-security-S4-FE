@@ -6,7 +6,7 @@ import { Pagination } from '@/shared/ui/Pagination';
 
 export const MemeList = () => {
   const [memes, setMemes] = useState<Meme[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
