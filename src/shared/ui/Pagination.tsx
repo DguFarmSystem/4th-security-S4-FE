@@ -14,7 +14,7 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }: Pagination
           key={page}
           onClick={() => onPageChange(page)}
           className={`w-[30px] h-[30px] text-[15px] rounded outline-none border-none ${
-            currentPage === page ? 'bg-[#FF7878] text-[#FFF6F6]' : 'bg-[#FFDBDB]'
+            currentPage === page - 1? 'bg-[#FF7878] text-[#FFF6F6]' : 'bg-[#FFDBDB]'
           }`}
         >
           {page}
